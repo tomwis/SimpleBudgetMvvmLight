@@ -4,6 +4,9 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using FFImageLoading.Forms.Touch;
+using FFImageLoading.Svg.Forms;
+using System.Reflection;
 
 namespace SimpleBudgetMvvmLight.iOS
 {
@@ -22,6 +25,9 @@ namespace SimpleBudgetMvvmLight.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            CachedImageRenderer.Init();
+            var svgAssembly = typeof(SvgCachedImage).GetTypeInfo().Assembly;
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 

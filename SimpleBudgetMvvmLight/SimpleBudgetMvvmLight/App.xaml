@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SimpleBudgetMvvmLight.App">
 	<Application.Resources>
-
-		<!-- Application resource dictionary -->
-
+        <ResourceDictionary></ResourceDictionary>
 	</Application.Resources>
 </Application>

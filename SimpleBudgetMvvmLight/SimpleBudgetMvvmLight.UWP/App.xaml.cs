@@ -1,7 +1,10 @@
-﻿using System;
+﻿using FFImageLoading.Forms.WinUWP;
+using FFImageLoading.Svg.Forms;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -57,6 +60,8 @@ namespace SimpleBudgetMvvmLight.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+
+                CachedImageRenderer.Init();
 
                 Xamarin.Forms.Forms.Init(e);
 

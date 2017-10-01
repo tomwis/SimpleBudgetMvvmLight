@@ -1,4 +1,7 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Ioc;
+using SimpleBudgetMvvmLight.Services;
+using SimpleBudgetMvvmLight.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,11 +12,17 @@ namespace SimpleBudgetMvvmLight
 {
     public partial class App : Application
     {
+        static ViewModelLocator _locator;
+        public static ViewModelLocator Locator => _locator ?? (_locator = new ViewModelLocator());
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new SimpleBudgetMvvmLight.MainPage();
+            Resources["Locator"] = Locator;
+
+            MainPage = new NavigationPage(new DashboardPage());
+            SimpleIoc.Default.GetInstance<INavigationService>().Navigation = MainPage.Navigation;
         }
 
         protected override void OnStart()
