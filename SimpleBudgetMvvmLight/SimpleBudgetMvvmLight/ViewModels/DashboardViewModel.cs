@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using SimpleBudgetMvvmLight.Helpers;
 using SimpleBudgetMvvmLight.Models;
 using SimpleBudgetMvvmLight.Resources;
@@ -61,7 +62,7 @@ namespace SimpleBudgetMvvmLight.ViewModels
             }
         }
 
-        public Command AddMonthCmd => new Command(async () =>
+        public RelayCommand AddMonthCmd => new RelayCommand(async () =>
         {
             _monthService.SelectedMonth = null;
             await _navigationService.Navigate<MonthEditPage>();

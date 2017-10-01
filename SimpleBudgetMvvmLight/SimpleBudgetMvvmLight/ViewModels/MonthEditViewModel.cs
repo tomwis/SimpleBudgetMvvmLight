@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using SimpleBudgetMvvmLight.Helpers;
 using SimpleBudgetMvvmLight.Models;
 using SimpleBudgetMvvmLight.Models.Enums;
@@ -148,14 +149,14 @@ namespace SimpleBudgetMvvmLight.ViewModels
             }
         }
 
-        public Command<BudgetItemType> AddExpeseCmd => new Command<BudgetItemType>(t => 
+        public RelayCommand<BudgetItemType> AddExpeseCmd => new RelayCommand<BudgetItemType>(t => 
         {
             var newItem = new BudgetItem { Type = t };
             newItem.PropertyChanged += BudgetItem_PropertyChanged;
             BudgetItems.First(s => s.Type == t).Add(newItem);
         });
 
-        public Command<BudgetItem> DeleteExpeseCmd => new Command<BudgetItem>(b => 
+        public RelayCommand<BudgetItem> DeleteExpeseCmd => new RelayCommand<BudgetItem>(b => 
         {
             var group = BudgetItems.First(s => s.Type == b.Type);
             b.PropertyChanged -= BudgetItem_PropertyChanged;
@@ -163,7 +164,7 @@ namespace SimpleBudgetMvvmLight.ViewModels
             CalculateMoneyLeft();
         });
 
-        public Command SaveCmd => new Command(async () => 
+        public RelayCommand SaveCmd => new RelayCommand(async () => 
         {
             // save
             var items = new List<BudgetItem>(BudgetItems[0]);
@@ -186,8 +187,7 @@ namespace SimpleBudgetMvvmLight.ViewModels
                 await _navigationService.GoBack();
             }
         });
-
-
+        
         private MonthItem _monthItem;
         public MonthItem MonthItem
         {
