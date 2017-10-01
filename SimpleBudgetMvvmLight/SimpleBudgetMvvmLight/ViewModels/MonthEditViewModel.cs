@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using SimpleBudgetMvvmLight.Helpers;
 using SimpleBudgetMvvmLight.Models;
 using SimpleBudgetMvvmLight.Models.Enums;
@@ -19,15 +20,17 @@ namespace SimpleBudgetMvvmLight.ViewModels
     public class MonthEditViewModel : ViewModelBase
     {
         IDbService _dbService;
-        INavigationService _navigationService;
+        Services.INavigationService _navigationService;
         IMonthService _monthService;
+        IDialogService _dialogService;
         bool _isEditing;
-
-        public MonthEditViewModel(IDbService dbService, INavigationService navigationService, IMonthService monthService)
+        
+        public MonthEditViewModel(IDbService dbService, Services.INavigationService navigationService, IMonthService monthService, IDialogService dialogService)
         {
             _dbService = dbService;
             _navigationService = navigationService;
             _monthService = monthService;
+            _dialogService = dialogService;
             Init(_monthService.SelectedMonth);
             _monthService.OnSelectedMonthChanged += _monthService_OnSelectedMonthChanged;
         }
@@ -178,7 +181,15 @@ namespace SimpleBudgetMvvmLight.ViewModels
 
             if (!_isEditing && _dbService.HasMonth(MonthItem.Month, MonthItem.Year))
             {
-                await App.Current.MainPage.DisplayAlert("", AppResources.MothAlreadyExistsMessage, AppResources.Ok);
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    await App.Current.MainPage.DisplayAlert("", AppResources.MothAlreadyExistsMessage, AppResources.Ok);
+                }
+                else
+                {
+                    await _dialogService.ShowMessage(AppResources.MothAlreadyExistsMessage, "", AppResources.Ok, null);
+                }
+
             }
             else
             {

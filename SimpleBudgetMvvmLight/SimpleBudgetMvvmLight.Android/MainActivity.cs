@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Droid;
+using GalaSoft.MvvmLight.Views;
 
 namespace SimpleBudgetMvvmLight.Droid
 {
@@ -24,6 +25,7 @@ namespace SimpleBudgetMvvmLight.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+            App.Locator.SetDialogService(new DialogService());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace SimpleBudgetMvvmLight.UWP
             this.InitializeComponent();
 
             LoadApplication(new SimpleBudgetMvvmLight.App());
+            SimpleBudgetMvvmLight.App.Locator.SetDialogService(new DialogService());
         }
     }
 }

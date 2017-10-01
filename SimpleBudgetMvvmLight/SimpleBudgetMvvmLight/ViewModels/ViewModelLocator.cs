@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using SimpleBudgetMvvmLight.PlatformServices;
 using SimpleBudgetMvvmLight.Services;
@@ -19,8 +20,13 @@ namespace SimpleBudgetMvvmLight.ViewModels
             SimpleIoc.Default.Register<DashboardViewModel>();
             SimpleIoc.Default.Register<MonthEditViewModel>();
             SimpleIoc.Default.Register<IDbService>(() => new DbService(DependencyService.Get<IFileService>()));
-            SimpleIoc.Default.Register<INavigationService, NavigationService>();
+            SimpleIoc.Default.Register<Services.INavigationService, NavigationService>();
             SimpleIoc.Default.Register<IMonthService, MonthService>();
+        }
+
+        public void SetDialogService(IDialogService dialogService)
+        {
+            SimpleIoc.Default.Register(() => dialogService);
         }
 
         public DashboardViewModel Dashboard => ServiceLocator.Current.GetInstance<DashboardViewModel>();

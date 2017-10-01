@@ -7,6 +7,7 @@ using UIKit;
 using FFImageLoading.Forms.Touch;
 using FFImageLoading.Svg.Forms;
 using System.Reflection;
+using GalaSoft.MvvmLight.Views;
 
 namespace SimpleBudgetMvvmLight.iOS
 {
@@ -30,6 +31,7 @@ namespace SimpleBudgetMvvmLight.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+            App.Locator.SetDialogService(new DialogService());
 
             return base.FinishedLaunching(app, options);
         }
